@@ -1,14 +1,5 @@
-#include "main.h"
-
-/**
- * print_alphabet - prints the alphabet in lowercase, followed by a new line.
- */
-void print_alphabet(void)
-{
-	char letter;
-
-	for (letter = 'a'; letter <= 'z'; letter++)
-		_putchar(letter);
-
-	_putchar('\n');
-}
+#!/usr/bin/python3
+def element_at(my_list, idx):
+    if 0 <= idx < len(my_list):
+        return my_list[idx]
+    return None
