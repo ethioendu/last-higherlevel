@@ -1,62 +1,70 @@
 #!/usr/bin/python3
-"""Square module.
-This module contains a class that defines a square and its size and checking
-if the given values are right, and a setter and getter methods to set or get
-it. Some equivalence methods are present to help handles the use of
-comparators. There's also an area method that returns the area of the square.
-"""
+
+"""Define a class Square."""
 
 
-class Square():
-    """Defines a square."""
+class Square:
+    """Represent a square."""
 
-    def __init__(self, size=0):
-        """Sets the necessary attributes for the Square object.
+    def __init__(self, size=0, position=(0, 0)):
+        """Initialize a new square.
         Args:
-            size (int): the size of one edge of the square.
+            size (int): The size of the new square.
+            position (int, int): The position of the new square.
         """
         self.size = size
-
-    def __eq__(self, other):
-        """Sets the compare equality behavior of the Square object.
-        Args:
-            other (Square): the Square object to compare with.
-        """
-        if type(other) is Square:
-            return self.area() == other.area()
-
-    def __lt__(self, other):
-        """Sets the compare less than behavior of the Square object.
-        Args:
-            other (Square): the Square object to compare with.
-        """
-        if type(other) is Square:
-            return self.area() < other.area()
-
-    def __le__(self, other):
-        """Sets the compare less equal than behavior of the Square object.
-        Args:
-            other (Square): the Square object to compare with.
-        """
-        if type(other) is Square:
-            return self.area() <= other.area()
+        self.position = position
 
     @property
     def size(self):
-        """Get or set the size of the square."""
-        return self.__size
+        """Get/set the current size of the square."""
+        return (self.__size)
 
     @size.setter
     def size(self, value):
-        if type(value) is int:
-            if value >= 0:
-                self.__size = value
-            else:
-                raise ValueError("size must be >= 0")
-        else:
+        if not isinstance(value, int):
             raise TypeError("size must be an integer")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
+
+    @property
+    def position(self):
+        """Get/set the current position of the square."""
+        return (self.__position)
+
+    @position.setter
+    def position(self, value):
+        if (not isinstance(value, tuple) or
+                len(value) != 2 or
+                not all(isinstance(num, int) for num in value) or
+                not all(num >= 0 for num in value)):
+            raise TypeError("position must be a tuple of 2 positive integers")
+        self.__position = value
 
     def area(self):
-        """Returns the current square area."""
+        """Return the current area of the square."""
+        return (self.__size * self.__size)
 
-        return self.__size ** 2
+    def my_print(self):
+        """Print the square with the # character."""
+        if self.__size == 0:
+            print("")
+            return
+
+        [print("") for i in range(0, self.__position[1])]
+        for i in range(0, self.__size):
+            [print(" ", end="") for j in range(0, self.__position[0])]
+            [print("#", end="") for k in range(0, self.__size)]
+            print("")
+
+    def __str__(self):
+        """Define the print() representation of a Square."""
+        if self.__size != 0:
+            [print("") for i in range(0, self.__position[1])]
+        for i in range(0, self.__size):
+            [print(" ", end="") for j in range(0, self.__position[0])]
+            [print("#", end="") for k in range(0, self.__size)]
+            if i != self.__size - 1:
+                print("")
+        return ("")
