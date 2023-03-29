@@ -1,30 +1,45 @@
 #!/usr/bin/python3
+"""Square module.
+This module contains a class that defines a square and its size and checking
+if the given values are right, and a setter and getter methods to set or get
+it. Some equivalence methods are present to help handles the use of
+comparators. There's also an area method that returns the area of the square.
+"""
 
 
 class Square():
     """Defines a square."""
 
-    def __init__(self, size=0, position=(0, 0)):
+    def __init__(self, size=0):
         """Sets the necessary attributes for the Square object.
         Args:
             size (int): the size of one edge of the square.
-            position (tuple): the coordinates of the square.
         """
         self.size = size
-        self.position = position
 
-    def __str__(self):
-        """Sets the print behavior of the Square object."""
-        square_str = ""
+    def __eq__(self, other):
+        """Sets the compare equality behavior of the Square object.
+        Args:
+            other (Square): the Square object to compare with.
+        """
+        if type(other) is Square:
+            return self.area() == other.area()
 
-        if self.__size > 0:
-            for y in range(self.__position[1]):
-                square_str += '\n'
-            for x in range(self.__size):
-                square_str += ' ' * self.__position[0]
-                square_str += '#' * self.__size + '\n'
+    def __lt__(self, other):
+        """Sets the compare less than behavior of the Square object.
+        Args:
+            other (Square): the Square object to compare with.
+        """
+        if type(other) is Square:
+            return self.area() < other.area()
 
-        return square_str[:-1]
+    def __le__(self, other):
+        """Sets the compare less equal than behavior of the Square object.
+        Args:
+            other (Square): the Square object to compare with.
+        """
+        if type(other) is Square:
+            return self.area() <= other.area()
 
     @property
     def size(self):
@@ -41,30 +56,7 @@ class Square():
         else:
             raise TypeError("size must be an integer")
 
-    @property
-    def position(self):
-        """Get or set the position of the square."""
-        return self.__position
-
-    @position.setter
-    def position(self, value):
-        if type(value) is tuple and len(value) is 2 and \
-                type(value[0]) is int and type(value[1]) is int:
-            self.__position = value
-        else:
-            raise TypeError("position must be a tuple of 2 positive integers")
-
     def area(self):
         """Returns the current square area."""
-        return self.__size ** 2
 
-    def my_print(self):
-        """Prints the square with the # character on stdout."""
-        if self.__size > 0:
-            for y in range(self.__position[1]):
-                print()
-            for x in range(self.__size):
-                print(' ' * self.__position[0], end='')
-                print('#' * self.__size)
-        else:
-            print()
+        return self.__size ** 2
