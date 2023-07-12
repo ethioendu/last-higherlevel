@@ -1,8 +1,7 @@
 #!/usr/bin/python3
+MyList = __import__('1-my_list').MyList
 
-myList = _import_('1-my_list').MyList
-
-my-list = Mylist()
+my_list = MyList()
 my_list.append(1)
 my_list.append(4)
 my_list.append(2)
