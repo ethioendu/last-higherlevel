@@ -1,12 +1,4 @@
 #!/usr/bin/python3
-"""
-
-==============
-module with class
-=====================
-
-"""
-
 class MyList(list):
     """Class with method print_sorted"""
     pass
