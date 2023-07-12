@@ -1,18 +1,12 @@
 #!/usr/bin/python3
 """
-=======================================
-module with class base-geometry
-=========================================
+=============================
+Module with the method lookpu
+=============================
 """
 
-class Basegeometry:
-    """method for calculated area"""
-    raise Exception("area() is not implemented")
 
-def integer_validator(self, name, value):
-    """Method for validate if a num is integer"""
+def lookup(obj):
+    """Function for return the attributes for an object"""
 
-    if type(value) is not int:
-        raise TypeError("{} must be an integer". format(name))
-    if value <= 0:
-        raise ValueError("{} must be grater than 0". format(name))
+    return dir(obj)
